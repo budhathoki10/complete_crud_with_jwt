@@ -19,7 +19,15 @@ let createss = async (req, res) => {
 
 let readss= async (req,res)=>{
     try {
-    const users = await user.find();
+      const {status,sort}= req.query
+      const filter= {}
+      if(status){
+        filter.status= status
+      }
+
+    const order = sort ==="ascending"?1:-1
+    const users = await user.find(filter).sort({date:order});
+
     if (users.length === 0) {
       return res.status(404).json({ message: "Database is empty" });
     }
@@ -27,6 +35,7 @@ let readss= async (req,res)=>{
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
+
 }
 
 let update= async(req,res)=>{
