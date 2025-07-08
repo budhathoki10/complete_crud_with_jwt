@@ -9,6 +9,7 @@ mongoose.connect('mongodb://localhost:27017/todoapplication').then(()=>{
 }).catch(()=>{
     console.log("cannot connect to mongodb")
 })
+
 app.use('/api/task',jwtroute)
 app.use('/api/user',router)
 

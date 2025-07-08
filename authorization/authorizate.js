@@ -50,4 +50,16 @@ jwtroute.post("/login",async(req,res)=>{
     }
         
 })
+
+jwtroute.post("/logout",(req,res)=>{
+    try {
+        localStorage.removeItem("token");
+        // note: actually this logout system must be in frontend side so localStorage is a Web API available only in browsers (client-side).
+        // to logout we have to do from the frontend and remove the token. 
+        // it only display the logout sucessfully but in actually it doesnot logout
+        res.status(200).json({message:"logout sucessfully"})
+    } catch (error) {
+          res.status(404).json({message:"error in logout"})
+    }
+})
 module.exports= jwtroute
